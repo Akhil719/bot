@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" name="TRMS" type="DelimitedFile">
+  <AccountCorrelationConfig>
+    <Reference class="sailpoint.object.CorrelationConfig" name="myAccessID-CorrelationConfig"/>
+  </AccountCorrelationConfig>
+  <Attributes>
+    <Map>
+      <entry key="SOMDetails"/>
+      <entry key="delimiter" value=","/>
+      <entry key="file" value="%%asset_onboarding_file_path%%TRMS.csv"/>
+      <entry key="filetransport" value="local"/>
+      <entry key="filterEmptyRecords">
+        <value>
+          <Boolean>true</Boolean>
+        </value>
+      </entry>
+      <entry key="hasHeader">
+        <value>
+          <Boolean>true</Boolean>
+        </value>
+      </entry>
+      <entry key="isSOMConnected">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="ygyfhf"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="TRMS-Owners-Workgroup"/>
+  </Owner>
+  <ProvisioningForms>
+    <Form name="Create_Policy" objectType="account" type="Create">
+      <Attributes>
+        <Map>
+          <entry key="pageTitle" value="Create_Policy"/>
+        </Map>
+      </Attributes>
+      <Section name="Required_Attributes_Form">
+        <Field displayName="myAccessID" name="myAccessID" type="String">
+          <Script>
+            <Source><![CDATA[return identity.getName();]]></Source>
+          </Script>
+        </Field>
+      </Section>
+    </Form>
+  </ProvisioningForms>
+  <Remediators>
+    <Reference class="sailpoint.object.Identity" name="TRMS-Implementers-Workgroup"/>
+  </Remediators>
+  <Schemas>
+    <Schema displayAttribute="myAccessID" identityAttribute="myAccessID" nativeObjectType="account" objectType="account">
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="SystemAccessID" type="string"/>
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="myAccessID" type="string"/>
+    </Schema>
+  </Schemas>
+  <ApplicationScorecard/>
+</Application>
